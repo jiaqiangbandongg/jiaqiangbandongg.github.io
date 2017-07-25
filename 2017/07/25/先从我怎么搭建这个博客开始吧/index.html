@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="机器变得更残忍">
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="null,node.js blog">
+    <meta name="keywords" content="null,hexo">
 
     <!-- Site Verification -->
     
@@ -68,7 +68,7 @@
     <meta property="og:title" content="先从我怎么搭建这个博客开始吧 | 机器变得更残忍的博客">
     <meta property="og:image" content="/img/favicon.png" />
     <meta property="og:description" content="">
-    <meta property="og:article:tag" content="node.js blog"> 
+    <meta property="og:article:tag" content="hexo"> 
 
     
         <meta property="article:published_time" content="7月 25, 2017" />
@@ -335,7 +335,7 @@
 
     
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#环境安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#主题安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">主题安装</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#环境安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">环境安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主题安装【可选】"><span class="post-toc-number">2.</span> <span class="post-toc-text">主题安装【可选】</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上传到github"><span class="post-toc-number">3.</span> <span class="post-toc-text">上传到github</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置github"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">配置github</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置hexo"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">配置hexo</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写作"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">写作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上传"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">上传</span></a></li></ol></li></ol>
         <!--
         <li class="mdl-menu__item">
             Some Action
@@ -407,6 +407,17 @@
 
     <!-- Qrcode -->
     
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="https://pan.baidu.com/share/qrcode?w=246&h=246&url=http://yoursite.com/2017/07/25/先从我怎么搭建这个博客开始吧/">
+    
+</ul>
+    
 
     <!-- Tags (bookmark) -->
     
@@ -416,7 +427,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/node-js-blog/">node.js blog</a>
+        <a class="post_tag-link" href="/tags/hexo/">hexo</a>
     </ul>
     
 
@@ -483,11 +494,19 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p>先安装</p>
-<p>node.js<br>git</p>
+        <h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>node.js<br>git</p>
 <p>然后在命令行输入如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">npm install</div><div class="line">hexo server</div></pre></td></tr></table></figure></p>
 <p>浏览器里打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就能看见了</p>
-<h1 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h1><p><a href="https://material.viosey.com/en/start/" target="_blank" rel="external">https://material.viosey.com/en/start/</a></p>
+<h2 id="主题安装【可选】"><a href="#主题安装【可选】" class="headerlink" title="主题安装【可选】"></a>主题安装【可选】</h2><p><a href="https://material.viosey.com/start/" target="_blank" rel="external">https://material.viosey.com/start/</a></p>
+<h2 id="上传到github"><a href="#上传到github" class="headerlink" title="上传到github"></a>上传到github</h2><h3 id="配置github"><a href="#配置github" class="headerlink" title="配置github"></a>配置github</h3><p>New repository 名字为 你的github名字.github.io<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</div></pre></td></tr></table></figure></p>
+<p>生成id_rsa和id_rsa.pub两个文件</p>
+<p>把id_rsa.pub添加到github里面</p>
+<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><p>打开<code>_config.yml</code><br>修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:xx/xx.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<h3 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;标题&quot;</div></pre></td></tr></table></figure>
+<p>然后在<code>source\_posts</code>目录里面找到<code>标题.md</code><br>编辑好内容后 执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
+<p>生成静态页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --debug</div></pre></td></tr></table></figure></p>
+<p>进行本地调试</p>
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>觉得差不多就直接上传吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
 
     
 
@@ -556,7 +575,7 @@
 
     <!-- Sidebar Email -->
     <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        youremail@email.com
+        396370321@qq.com
         <b class="caret"></b>
     </a>
 </div>
