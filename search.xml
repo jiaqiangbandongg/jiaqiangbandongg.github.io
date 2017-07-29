@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Hexo NexT 添加小功能]]></title>
+      <url>/2017/07/29/Hexo-NexT-%E6%B7%BB%E5%8A%A0%E5%B0%8F%E5%8A%9F%E8%83%BD/</url>
+      <content type="html"><![CDATA[<p>接上文<a href="/2017/07/25/先从我怎么搭建这个博客开始吧/" title="先从我怎么搭建这个博客开始吧">先从我怎么搭建这个博客开始吧</a></p>
+<p>之前搭建完只有基础功能，十分简单，但Hexo功能非常强大，可以给博客增加不少实用的功能。</p>
+<h2 id="Next主题"><a href="#Next主题" class="headerlink" title="Next主题"></a>Next主题</h2><p>就是我的博客目前使用的，<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a> ，可以很方便地使用一些第三方服务，这次增加小功能也是利用这一点。</p>
+<h2 id="增加评论功能"><a href="#增加评论功能" class="headerlink" title="增加评论功能"></a>增加评论功能</h2><p>评论功能可以让内容更丰富，可以让访客留下评论和建议，便于博客地改进以及优化。<br>本来打算使用多说地，后来发现已经关闭了，抱着偷懒之上的原则，我用了disqus，配置过程如下。</p>
+<h3 id="注册一个账号"><a href="#注册一个账号" class="headerlink" title="注册一个账号"></a>注册一个账号</h3><p><a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a><br>步骤比较简单，就不说了。</p>
+<h3 id="定一个shortname"><a href="#定一个shortname" class="headerlink" title="定一个shortname"></a>定一个shortname</h3><p>填写自己的网站，然后再填写一个自定义的shortname</p>
+<h3 id="编辑主题配置文件"><a href="#编辑主题配置文件" class="headerlink" title="编辑主题配置文件"></a>编辑<code>主题配置文件</code></h3><p>将 disqus 下的 enable 设定为 true，同时提供您的 shortname。count 用于指定是否显示评论数量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">disqus:</div><div class="line">  enable: false</div><div class="line">  shortname:</div><div class="line">  count: true</div></pre></td></tr></table></figure></p>
+<h2 id="增加分享功能"><a href="#增加分享功能" class="headerlink" title="增加分享功能"></a>增加分享功能</h2><p>分享方便网站推广，看见好文章就喜欢分享，算是人的天性吧hhh。JiaThis配置比较简单，改动很少，嗯就这个不错。</p>
+<h3 id="编辑主题配置文件-1"><a href="#编辑主题配置文件-1" class="headerlink" title="编辑主题配置文件"></a>编辑<code>主题配置文件</code></h3><p>添加/修改字段 jiathis，值为 true。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># JiaThis 分享服务</div><div class="line">jiathis: true</div></pre></td></tr></table></figure></p>
+<h2 id="增加搜索功能"><a href="#增加搜索功能" class="headerlink" title="增加搜索功能"></a>增加搜索功能</h2><p>搜索功能真心好用，当文章多起来的时候，标签提供的作用已经很少了，只能简单索引，搜索却能精确查找，这里我用的依旧是最简单的本地站内搜索。</p>
+<h3 id="安装hexo-generator-searchdb"><a href="#安装hexo-generator-searchdb" class="headerlink" title="安装hexo-generator-searchdb"></a>安装hexo-generator-searchdb</h3><p>在站点的根目录下执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-searchdb --save</div></pre></td></tr></table></figure></p>
+<h3 id="配置站点配置文件"><a href="#配置站点配置文件" class="headerlink" title="配置站点配置文件"></a>配置<code>站点配置文件</code></h3><p>新增以下内容到任意位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">search:</div><div class="line">  path: search.xml</div><div class="line">  field: post</div><div class="line">  format: html</div><div class="line">  limit: 10000</div></pre></td></tr></table></figure></p>
+<h3 id="配置主题配置文件"><a href="#配置主题配置文件" class="headerlink" title="配置主题配置文件"></a>配置<code>主题配置文件</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># Local search</div><div class="line">local_search:</div><div class="line">  enable: true</div></pre></td></tr></table></figure>
+<h2 id="常见错误解决方法"><a href="#常见错误解决方法" class="headerlink" title="常见错误解决方法"></a>常见错误解决方法</h2><p>配置完记得先<code>hexo clean</code>，再<code>hexo generate</code>。<br>大多数报错我是看不懂的，因为不懂node.js，采取的解决措施也比较简单，那就是撤销之前的步骤，很管用~~</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://theme-next.iissnan.com/third-party-services.html" target="_blank" rel="external">http://theme-next.iissnan.com/third-party-services.html</a><br><a href="http://blog.csdn.net/u010053344/article/details/50701191" target="_blank" rel="external">http://blog.csdn.net/u010053344/article/details/50701191</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 搭建博客 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[KDD CUP 2015 赛题回顾]]></title>
+      <url>/2017/07/27/KDD-CUP-2015-%E8%B5%9B%E9%A2%98%E5%9B%9E%E9%A1%BE/</url>
+      <content type="html"><![CDATA[<p>先随便写点东西吧</p>
+<h2 id="数据集可视化"><a href="#数据集可视化" class="headerlink" title="数据集可视化"></a>数据集可视化</h2><p>可视化算是了解数据集的一部分，可以很好地去把握自己对数据地敏感，观察数据的分布也会对做特征有帮助。</p>
+<h3 id="Tableau"><a href="#Tableau" class="headerlink" title="Tableau"></a>Tableau</h3><p>具体操作不好描述，反正就是看完官方教程就会做点简单的图了，稍加摸索也能画的有模有样。<br><img src="http://i.imgur.com/07HI9dk.png" alt=""></p>
+<p>完整版地址<br><a href="https://public.tableau.com/profile/terryga#!/vizhome/KDDCUP2015MOOCdropoutprediction/sheet7" target="_blank" rel="external">https://public.tableau.com/profile/terryga#!/vizhome/KDDCUP2015MOOCdropoutprediction/sheet7</a><br>这里就顺带说个小缺陷吧，没法很顺手地数据分析，或许是习惯了pandas各种命令了，一些简单地统计量通过按钮也不好实现。<br>Tableau这个软件感觉更适合做报表，反正就是挺有趣地啦。<br>下一个要挑战的是Seaborn可视化，这个库在Kaggle里面用得比较多，估计我要把这个当作重点来学习了。</p>
+<h3 id="seaborn"><a href="#seaborn" class="headerlink" title="seaborn"></a>seaborn</h3>]]></content>
+      
+        <categories>
+            
+            <category> 比赛回顾 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tableau </tag>
+            
+            <tag> 可视化 </tag>
+            
+            <tag> KDD CUP </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Tableau 可视化初体验]]></title>
+      <url>/2017/07/26/Tableau-%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+      <content type="html"><![CDATA[<p>Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>这是public版，输入邮箱就能下载安装了<br><a href="https://public.tableau.com/s/" target="_blank" rel="external">https://public.tableau.com/s/</a><br><img src="http://i.imgur.com/2gq0Tf4.png" alt=""><br>还有收费版，通过<strong>时间驻留器</strong>就能无限试用，这里不推荐，还是要支持正版的</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p>刚开始进入程序需要导入数据<br><img src="http://i.imgur.com/pf19EGc.png" alt=""><br>支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV，CSV的本质就是<strong>字符分隔值</strong>，所以选择文本文件<br>因为只有单个文件train.csv所以不需要进行数据拼接操作<br><img src="http://i.imgur.com/AwfwTcI.png" alt=""></p>
+<h3 id="绘制图表"><a href="#绘制图表" class="headerlink" title="绘制图表"></a>绘制图表</h3><p>绘制图表就是这个软件的核心了，通过将左侧的数据拖拽至右侧，可以很方便地构建需要地图表。<br><img src="http://i.imgur.com/WqueNvn.png" alt=""><br>这里简单地把Sex拖动到行Survived拖动至列，然后把Sex拖到颜色让图表更好看。</p>
+<h3 id="绘制仪表盘"><a href="#绘制仪表盘" class="headerlink" title="绘制仪表盘"></a>绘制仪表盘</h3><p>仪表盘简单来说就是把多个图表放在一页，使用方法依旧是拖动。<br><img src="http://i.imgur.com/6wJQml3.png" alt=""></p>
+<h3 id="绘制故事"><a href="#绘制故事" class="headerlink" title="绘制故事"></a>绘制故事</h3><p>这个名字取得比较诡异，功能相当于给仪表盘或者图表配文字。<br><img src="http://i.imgur.com/udXuwyQ.png" alt=""></p>
+<h3 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h3><p>如果用的是免费版，恭喜了，你只能在线存储，而且存储速度略慢，不保存下次打开就什么都没有了。对了，保存了再下载下来很容易出错，这个很让人蛋疼，所以。。。你看着办吧。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>总结一下，Tableau的使用还是很方便的，全是靠拖拽，如果操作不当还可以<code>Ctrl+Z</code>撤销，这次简单的初体验没有使用到高级功能，所以还没法做出特别酷炫的图表。</p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>Tableau网上的教程还是挺少的，主要是看官方的免费教程<br><a href="https://www.tableau.com/zh-cn/learn/training" target="_blank" rel="external">https://www.tableau.com/zh-cn/learn/training</a><br>还有就是Coursera的Data Visualization with Tableau 专项课程<br><a href="https://www.coursera.org/specializations/data-visualization" target="_blank" rel="external">https://www.coursera.org/specializations/data-visualization</a><br>这个课程也是免费的，申请旁听就好了</p>
+<p>还有就是多看看别人做的可视化，每日精选啥的，找点灵感<br><a href="https://public.tableau.com/zh-cn/s/gallery" target="_blank" rel="external">https://public.tableau.com/zh-cn/s/gallery</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Tableau入门到精通 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tableau </tag>
+            
+            <tag> 可视化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[先从我怎么搭建这个博客开始吧]]></title>
+      <url>/2017/07/25/%E5%85%88%E4%BB%8E%E6%88%91%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%A7%8B%E5%90%A7/</url>
+      <content type="html"><![CDATA[<h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>node.js<br>git</p>
+<p>然后在命令行输入如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">npm install</div><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<p>浏览器里打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就能看见了</p>
+<h2 id="主题安装【可选】"><a href="#主题安装【可选】" class="headerlink" title="主题安装【可选】"></a>主题安装【可选】</h2><p><a href="https://material.viosey.com/start/" target="_blank" rel="external">https://material.viosey.com/start/</a></p>
+<h2 id="上传到github"><a href="#上传到github" class="headerlink" title="上传到github"></a>上传到github</h2><h3 id="配置github"><a href="#配置github" class="headerlink" title="配置github"></a>配置github</h3><p>New repository 名字为 你的github名字.github.io<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</div></pre></td></tr></table></figure></p>
+<p>生成id_rsa和id_rsa.pub两个文件</p>
+<p>把id_rsa.pub添加到github里面</p>
+<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><p>打开<code>_config.yml</code><br>修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:xx/xx.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<h3 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;标题&quot;</div></pre></td></tr></table></figure>
+<p>然后在<code>source\_posts</code>目录里面找到<code>标题.md</code><br>编辑好内容后 执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
+<p>生成静态页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --debug</div></pre></td></tr></table></figure></p>
+<p>进行本地调试</p>
+<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>觉得差不多就直接上传吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 搭建博客 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
