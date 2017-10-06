@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://i.loli.net/2017/08/11/598d8029c4c0f.jpg">
 <meta property="og:image" content="https://i.loli.net/2017/08/11/598d8029cc19f.png">
 <meta property="og:image" content="http://i.imgur.com/JKXHGsG.png">
-<meta property="og:updated_time" content="2017-08-11T16:41:09.153Z">
+<meta property="og:updated_time" content="2017-10-01T12:24:03.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="目标！半天学完《Spark快速大数据分析》核心概念">
 <meta name="twitter:description" content="在写下这个标题的时候已经下午了，看来只有半天时间了（汗 初衷以及Spark简介最近找工作，发现很多公司都要求Hadoop、Spark，我平时也没有啥这方面的需求所以没学，而且这个东西真正用起来需要分布式集群。于是买了本书《Spark快速大数据分析》，挺薄的，而且是三种语言写的(java,scala,python)，如果只看Python，目测一天就能学完核心概念。 配置环境学习一门新技术，环境配置估">
@@ -416,7 +416,7 @@
 <p>顺带说下，可以直接在正常的python ide里面运行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line">sc = SparkContext(<span class="string">'local'</span>)</div><div class="line">lines = sc.textFile(<span class="string">'README.md'</span>) <span class="comment">#创建一个名为lines的RDD</span></div><div class="line">lines.count() <span class="comment">#统计RDD中的元素个数</span></div><div class="line">lines.first() <span class="comment">#这个RDD的第一个元素，也就是这个文件的第一行</span></div></pre></td></tr></table></figure></p>
 <h2 id="RDD是个啥"><a href="#RDD是个啥" class="headerlink" title="RDD是个啥"></a>RDD是个啥</h2><p>弹性分布式数据集(Resilient Distributed Datasets)就是一种对数据的抽象，你不用去管底层数据是咋存放的，也不用管那些操作放到底层咋实现的，Spark会自动帮你做好一切，RDD就是Spark的核心。</p>
 <p>RDD三种常见操作分为创建、转化以及行动。</p>
-<h3 id="创建操作"><a href="#创建操作" class="headerlink" title="创建操作"></a>创建操作</h3><p>有两种创建方法，一种是textFile，也就是从本地文件读取，还有一种是，将传入的集合并行化。<br>textFile上面已经有了，下面是parallelize的代码。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line">sc = SparkContext(<span class="string">'local'</span>)</div><div class="line">lines = sc.parallelize([<span class="string">'hello'</span>,<span class="string">'world'</span>,<span class="string">'!'</span>]) <span class="comment">#传入了一个list</span></div></pre></td></tr></table></figure></p>
+<h3 id="创建操作"><a href="#创建操作" class="headerlink" title="创建操作"></a>创建操作</h3><p>有两种创建方法，一种是textFile，也就是从本地文件读取，还有一种是parallelize，将传入的集合并行化。<br>textFile上面已经有了，下面是parallelize的代码。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line">sc = SparkContext(<span class="string">'local'</span>)</div><div class="line">lines = sc.parallelize([<span class="string">'hello'</span>,<span class="string">'world'</span>,<span class="string">'!'</span>]) <span class="comment">#传入了一个list</span></div></pre></td></tr></table></figure></p>
 <p>这就是创建好了，暂时不知道啥用，接着往下看。</p>
 <h3 id="转化操作"><a href="#转化操作" class="headerlink" title="转化操作"></a>转化操作</h3><p>转化操作，一般有map,filter,union等操作，也就是会返回一个RDD，不会产生实际计算，也就是<strong>惰性求值</strong>。<br>接着上面的parallelize继续写一个转化操作的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Olines = lines.filter(lambda x:&apos;o&apos; in x) # 根据传入的函数来筛选</div></pre></td></tr></table></figure></p>
 <blockquote>
@@ -482,6 +482,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/" rel="prev" title="给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南">
+                给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -584,7 +588,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

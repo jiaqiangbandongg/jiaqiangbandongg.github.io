@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Tableau,可视化," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -93,25 +93,26 @@
 
 
 
-<meta name="description" content="Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。 安装这是public版，输入邮箱就能下载安装了https://public.tableau.com/s/还有收费版，通过时间驻留器就能无限试用，这里不推荐，还是要支持正版的 使用方法导入数据刚开始进入程序需要导入数据支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV">
-<meta name="keywords" content="Tableau,可视化">
+<meta name="description" content="很早就知道XGBoost支持GPU了，不过一直没有配置，一方面是GPU版本的xgb配置，中文安装教程根本找不到，还有就是支持GPU的xgb还不是稳定版的。花了两天时间踩遍各种坑，特意整理好这个教程，方便各位。 安装CUDA这应该算是第一个坑，我的电脑在装tensorflow的时候就已经配置好CUDA了，看了下官方文档  Windows requirements for GPU build: onl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tableau 可视化初体验">
-<meta property="og:url" content="http://yoursite.com/2017/07/26/Tableau-可视化初体验/index.html">
+<meta property="og:title" content="给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南">
+<meta property="og:url" content="http://yoursite.com/2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/index.html">
 <meta property="og:site_name" content="日常">
-<meta property="og:description" content="Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。 安装这是public版，输入邮箱就能下载安装了https://public.tableau.com/s/还有收费版，通过时间驻留器就能无限试用，这里不推荐，还是要支持正版的 使用方法导入数据刚开始进入程序需要导入数据支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV">
+<meta property="og:description" content="很早就知道XGBoost支持GPU了，不过一直没有配置，一方面是GPU版本的xgb配置，中文安装教程根本找不到，还有就是支持GPU的xgb还不是稳定版的。花了两天时间踩遍各种坑，特意整理好这个教程，方便各位。 安装CUDA这应该算是第一个坑，我的电脑在装tensorflow的时候就已经配置好CUDA了，看了下官方文档  Windows requirements for GPU build: onl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/2gq0Tf4.png">
-<meta property="og:image" content="http://i.imgur.com/pf19EGc.png">
-<meta property="og:image" content="http://i.imgur.com/AwfwTcI.png">
-<meta property="og:image" content="http://i.imgur.com/WqueNvn.png">
-<meta property="og:image" content="http://i.imgur.com/6wJQml3.png">
-<meta property="og:image" content="http://i.imgur.com/udXuwyQ.png">
-<meta property="og:updated_time" content="2017-07-26T17:59:42.303Z">
+<meta property="og:image" content="http://i64.tinypic.com/2cf9j84.png">
+<meta property="og:image" content="http://i63.tinypic.com/207rgut.png">
+<meta property="og:image" content="http://i66.tinypic.com/i3gdoj.png">
+<meta property="og:image" content="http://i68.tinypic.com/wbqk5y.png">
+<meta property="og:image" content="http://i67.tinypic.com/ak973o.png">
+<meta property="og:image" content="http://i63.tinypic.com/315xy6v.png">
+<meta property="og:image" content="http://i64.tinypic.com/n2ddlu.png">
+<meta property="og:image" content="http://i67.tinypic.com/zmmtz5.png">
+<meta property="og:updated_time" content="2017-10-06T11:30:09.744Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tableau 可视化初体验">
-<meta name="twitter:description" content="Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。 安装这是public版，输入邮箱就能下载安装了https://public.tableau.com/s/还有收费版，通过时间驻留器就能无限试用，这里不推荐，还是要支持正版的 使用方法导入数据刚开始进入程序需要导入数据支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV">
-<meta name="twitter:image" content="http://i.imgur.com/2gq0Tf4.png">
+<meta name="twitter:title" content="给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南">
+<meta name="twitter:description" content="很早就知道XGBoost支持GPU了，不过一直没有配置，一方面是GPU版本的xgb配置，中文安装教程根本找不到，还有就是支持GPU的xgb还不是稳定版的。花了两天时间踩遍各种坑，特意整理好这个教程，方便各位。 安装CUDA这应该算是第一个坑，我的电脑在装tensorflow的时候就已经配置好CUDA了，看了下官方文档  Windows requirements for GPU build: onl">
+<meta name="twitter:image" content="http://i64.tinypic.com/2cf9j84.png">
 
 
 
@@ -139,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/26/Tableau-可视化初体验/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/"/>
 
 
 
 
 
-  <title>Tableau 可视化初体验 | 日常</title>
+  <title>给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南 | 日常</title>
   
 
 
@@ -328,7 +329,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/26/Tableau-可视化初体验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李孟禹">
@@ -345,7 +346,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tableau 可视化初体验</h1>
+          <h1 class="post-title" itemprop="name headline">给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南</h1>
         
 
         <div class="post-meta">
@@ -357,8 +358,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T22:55:55+08:00">
-                2017-07-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T19:13:30+08:00">
+                2017-10-06
               </time>
             
 
@@ -368,28 +369,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tableau入门到精通/" itemprop="url" rel="index">
-                    <span itemprop="name">Tableau入门到精通</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -398,9 +377,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/26/Tableau-可视化初体验/#comments" itemprop="discussionUrl">
+                <a href="/2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/26/Tableau-可视化初体验/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,16 +404,106 @@
       
 
       
-        <p>Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>这是public版，输入邮箱就能下载安装了<br><a href="https://public.tableau.com/s/" target="_blank" rel="external">https://public.tableau.com/s/</a><br><img src="http://i.imgur.com/2gq0Tf4.png" alt=""><br>还有收费版，通过<strong>时间驻留器</strong>就能无限试用，这里不推荐，还是要支持正版的</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p>刚开始进入程序需要导入数据<br><img src="http://i.imgur.com/pf19EGc.png" alt=""><br>支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV，CSV的本质就是<strong>字符分隔值</strong>，所以选择文本文件<br>因为只有单个文件train.csv所以不需要进行数据拼接操作<br><img src="http://i.imgur.com/AwfwTcI.png" alt=""></p>
-<h3 id="绘制图表"><a href="#绘制图表" class="headerlink" title="绘制图表"></a>绘制图表</h3><p>绘制图表就是这个软件的核心了，通过将左侧的数据拖拽至右侧，可以很方便地构建需要地图表。<br><img src="http://i.imgur.com/WqueNvn.png" alt=""><br>这里简单地把Sex拖动到行Survived拖动至列，然后把Sex拖到颜色让图表更好看。</p>
-<h3 id="绘制仪表盘"><a href="#绘制仪表盘" class="headerlink" title="绘制仪表盘"></a>绘制仪表盘</h3><p>仪表盘简单来说就是把多个图表放在一页，使用方法依旧是拖动。<br><img src="http://i.imgur.com/6wJQml3.png" alt=""></p>
-<h3 id="绘制故事"><a href="#绘制故事" class="headerlink" title="绘制故事"></a>绘制故事</h3><p>这个名字取得比较诡异，功能相当于给仪表盘或者图表配文字。<br><img src="http://i.imgur.com/udXuwyQ.png" alt=""></p>
-<h3 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h3><p>如果用的是免费版，恭喜了，你只能在线存储，而且存储速度略慢，不保存下次打开就什么都没有了。对了，保存了再下载下来很容易出错，这个很让人蛋疼，所以。。。你看着办吧。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>总结一下，Tableau的使用还是很方便的，全是靠拖拽，如果操作不当还可以<code>Ctrl+Z</code>撤销，这次简单的初体验没有使用到高级功能，所以还没法做出特别酷炫的图表。</p>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>Tableau网上的教程还是挺少的，主要是看官方的免费教程<br><a href="https://www.tableau.com/zh-cn/learn/training" target="_blank" rel="external">https://www.tableau.com/zh-cn/learn/training</a><br>还有就是Coursera的Data Visualization with Tableau 专项课程<br><a href="https://www.coursera.org/specializations/data-visualization" target="_blank" rel="external">https://www.coursera.org/specializations/data-visualization</a><br>这个课程也是免费的，申请旁听就好了</p>
-<p>还有就是多看看别人做的可视化，每日精选啥的，找点灵感<br><a href="https://public.tableau.com/zh-cn/s/gallery" target="_blank" rel="external">https://public.tableau.com/zh-cn/s/gallery</a></p>
+        <p>很早就知道XGBoost支持GPU了，不过一直没有配置，一方面是GPU版本的xgb配置，中文安装教程根本找不到，还有就是支持GPU的xgb还不是稳定版的。<br>花了两天时间踩遍各种坑，特意整理好这个教程，方便各位。</p>
+<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>这应该算是第一个坑，我的电脑在装tensorflow的时候就已经配置好CUDA了，看了下官方文档</p>
+<blockquote>
+<p><strong>Windows requirements</strong> for GPU build: only Visual C++ 2015 or 2013 with CUDA v8.0 were fully tested. Either install Visual C++ 2015 Build Tools separately, or as a part of Visual Studio 2015.</p>
+</blockquote>
+<p>刚好我电脑上已经装好了VS2015还有CUDA v8.0，结果在下面的构建过程中炸了，各种尝试后，装了最新版的CUDA v9.0，再也没有出过问题。</p>
+<h2 id="构建XGBoost"><a href="#构建XGBoost" class="headerlink" title="构建XGBoost"></a>构建XGBoost</h2><h3 id="先说下官网的教程"><a href="#先说下官网的教程" class="headerlink" title="先说下官网的教程"></a>先说下官网的教程</h3><p>官网教程链接 <a href="http://xgboost.readthedocs.io/en/latest/build.html" target="_blank" rel="external">http://xgboost.readthedocs.io/en/latest/build.html</a></p>
+<blockquote>
+<p>github上clone源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/dmlc/xgboost</div></pre></td></tr></table></figure></p>
+<p>在根目录下新建文件夹build，并进入该文件夹执行cmake相关命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake .. -G&quot;Visual Studio 14 2015 Win64&quot; -DUSE_CUDA=ON</div></pre></td></tr></table></figure></p>
+<p>然后cmake构建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cmake --build . --target xgboost --config Release</div></pre></td></tr></table></figure></p>
+<p>最后安装python包<br>进入python-package目录安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ..\python-package</div><div class="line">python setup.py install</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>注意</p>
+<ul>
+<li>cmake需要事先安装好，下载地址 <a href="https://cmake.org/download/" target="_blank" rel="external">https://cmake.org/download/</a> ，下载对应的msi文件，直接安装就好了</li>
+<li>根据你电脑的VS版本来更改<strong>Visual Studio 14 2015 Win64</strong>，比如你电脑上装的是vs2013的，就应该改为<strong>Visual Studio 12 2013 Win64</strong></li>
+<li>如果命令报错，别手动输入，直接复制去执行，还有问题那就继续往下看我的方法</li>
+</ul>
+<h3 id="接下来是我自己的方法"><a href="#接下来是我自己的方法" class="headerlink" title="接下来是我自己的方法"></a>接下来是我自己的方法</h3><ol>
+<li><p>克隆最新的xgboost源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/dmlc/xgboost</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装CMake<br><a href="https://cmake.org/download/" target="_blank" rel="external">https://cmake.org/download/</a><br>下载Windows的msi文件，直接安装</p>
+</li>
+<li><p>生成构建文件<br>打开桌面的<code>CMake (cmake-gui)</code><br>分别选择源码目录以及源码目录下的build文件夹(没有就新建一个)<br><img src="http://i64.tinypic.com/2cf9j84.png" alt=""><br>点击<code>Configure</code>，选择<code>Yes</code>，然后选择自己的VS版本，点击<code>Finish</code>结束<br><img src="http://i63.tinypic.com/207rgut.png" alt=""><br>然后你会发现一片红，这不是错误的意思，不用担心，把USE_CUDA勾上<br><img src="http://i66.tinypic.com/i3gdoj.png" alt=""><br>再点击<code>Configure</code><br><img src="http://i68.tinypic.com/wbqk5y.png" alt=""><br>啥也不管再来<code>Configure</code>!! 发现没有红的了，就说明Configure结束了<br><img src="http://i67.tinypic.com/ak973o.png" alt=""><br>点击<code>Generate</code>，你会发现<code>build</code>文件夹下多了vs的工程文件<br><img src="http://i63.tinypic.com/315xy6v.png" alt=""></p>
+</li>
+<li><p>开始构建<br>在<strong>CMake GUI</strong>中，点击<code>Open Project</code>，会自动调用VS打开工程，直接右键<code>生成解决方案</code>等待就好了,大概十分钟左右<br><img src="http://i64.tinypic.com/n2ddlu.png" alt=""><br>中途会出现各种<em>锟斤拷</em>，不必理会，只要最后不报错就成<br><img src="http://i67.tinypic.com/zmmtz5.png" alt=""></p>
+</li>
+<li><p>安装Python包<br>进入python-package目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ..\python-package</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="开跑"><a href="#开跑" class="headerlink" title="开跑"></a>开跑</h2><p>官方提供了一个基准(Benchmarks)</p>
+<blockquote>
+<p>Training time time on 1,000,000 rows x 50 columns with 500 boosting iterations and 0.25/0.75 test/train split on i7-6700K CPU @ 4.00GHz and Pascal Titan X.</p>
+<p>i7-6700K的CPU（4.00GHz）和Pascal Titan X，数据集大小为 1,000,000行 x 50列，按0.25/0.75划分测试集和训练集，训练时间如下</p>
+<table>
+<thead>
+<tr>
+<th>tree_method</th>
+<th>Time (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gpu_hist</td>
+<td>13.87</td>
+</tr>
+<tr>
+<td>hist</td>
+<td>63.55</td>
+</tr>
+<tr>
+<td>gpu_exact</td>
+<td>161.08</td>
+</tr>
+<tr>
+<td>exact</td>
+<td>1082.20</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>我拿我自己的机器尝试了一下，E3-1230V5 CPU (3.40GHz)，GTX 1060 GPU<br>在<code>tests\benchmark</code>目录下<br>分别执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">python benchmark.py --tree_method gpu_hist</div><div class="line">python benchmark.py --tree_method hist</div><div class="line">python benchmark.py --tree_method gpu_exact</div><div class="line">python benchmark.py --tree_method exact</div></pre></td></tr></table></figure></p>
+<p>训练时间如下</p>
+<table>
+<thead>
+<tr>
+<th>tree_method</th>
+<th>Time (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gpu_hist</td>
+<td>23.32</td>
+</tr>
+<tr>
+<td>hist</td>
+<td>57.34</td>
+</tr>
+<tr>
+<td>gpu_exact</td>
+<td>237.32</td>
+</tr>
+<tr>
+<td>exact</td>
+<td>689.52</td>
+</tr>
+</tbody>
+</table>
+<p>吃惊！CPU性能爆炸！<br>(⊙﹏⊙) 我的E3咋这么快呢。。。<br>暂时不管了，反正快也不是啥坏事。。。。</p>
+<p><strong>总的来说，训练时间缩短了不少</strong></p>
+<p>顺带一提，跑的过程中如果没有报错，那说明你安装是成功的，<strong>要是炸了，重头看看哪里出了问题吧~</strong></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>大体上和以前没区别，只要把 <em>tree_method</em> 改为 <em>gpu_hist</em> 或者 <em>gpu_exact</em> 就行<br>两者的区别可以简单归为：gpu_exact准确，但耗时耗内存，gpu_hist速度快，但不那么准确</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">param[&apos;gpu_id&apos;] = 0</div><div class="line">param[&apos;tree_method&apos;] = &apos;gpu_hist&apos; # or &apos;gpu_exact&apos;</div></pre></td></tr></table></figure>
+<p>如果有多个GPU，想要让指定GPU跑，那就改下gpu_id，至于多卡一起跑，我暂时还没设备，以后有机会再更新吧</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>大杀器配上核弹，效果棒极了！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.picnet.com.au/blogs/guido/post/2016/09/22/how-to-build-xgboost-on-windows/" target="_blank" rel="external">How to build XGBoost on Windows – Now with GPU support</a><br><a href="http://xgboost.readthedocs.io/en/latest/build.html#building-with-gpu-support" target="_blank" rel="external">Installation Guide &mdash; xgboost 0.6 documentation</a><br><a href="https://xgboost.readthedocs.io/en/latest/gpu/index.html" target="_blank" rel="external">XGBoost GPU Support &mdash; xgboost 0.6 documentation</a><br><a href="http://xgboost.readthedocs.io/en/latest/parameter.html" target="_blank" rel="external">XGBoost Parameters &mdash; xgboost 0.6 documentation</a></p>
 
       
     </div>
@@ -462,14 +531,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Tableau/" rel="tag"># Tableau</a>
-          
-            <a href="/tags/可视化/" rel="tag"># 可视化</a>
-          
-        </div>
-      
 
       
       
@@ -479,8 +540,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/25/先从我怎么搭建这个博客开始吧/" rel="next" title="先从我怎么搭建这个博客开始吧">
-                <i class="fa fa-chevron-left"></i> 先从我怎么搭建这个博客开始吧
+              <a href="/2017/08/11/目标！半天学完《Spark快速大数据分析》核心概念/" rel="next" title="目标！半天学完《Spark快速大数据分析》核心概念">
+                <i class="fa fa-chevron-left"></i> 目标！半天学完《Spark快速大数据分析》核心概念
               </a>
             
           </div>
@@ -488,10 +549,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/27/KDD-CUP-2015-赛题回顾/" rel="prev" title="KDD CUP 2015 赛题回顾">
-                KDD CUP 2015 赛题回顾 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -662,7 +719,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据"><span class="nav-number">2.1.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制图表"><span class="nav-number">2.2.</span> <span class="nav-text">绘制图表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制仪表盘"><span class="nav-number">2.3.</span> <span class="nav-text">绘制仪表盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制故事"><span class="nav-number">2.4.</span> <span class="nav-text">绘制故事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存"><span class="nav-number">2.5.</span> <span class="nav-text">保存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">4.</span> <span class="nav-text">进阶</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CUDA"><span class="nav-number">1.</span> <span class="nav-text">安装CUDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建XGBoost"><span class="nav-number">2.</span> <span class="nav-text">构建XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先说下官网的教程"><span class="nav-number">2.1.</span> <span class="nav-text">先说下官网的教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来是我自己的方法"><span class="nav-number">2.2.</span> <span class="nav-text">接下来是我自己的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开跑"><span class="nav-number">3.</span> <span class="nav-text">开跑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">4.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -817,9 +874,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/07/26/Tableau-可视化初体验/';
-          this.page.identifier = '2017/07/26/Tableau-可视化初体验/';
-          this.page.title = 'Tableau 可视化初体验';
+          this.page.url = 'http://yoursite.com/2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/';
+          this.page.identifier = '2017/10/06/给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南/';
+          this.page.title = '给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jiaqiangbandongg.disqus.com/embed.js';
