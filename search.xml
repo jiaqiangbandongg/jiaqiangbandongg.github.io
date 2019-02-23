@@ -1,297 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title><![CDATA[给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南]]></title>
-      <url>/2017/10/06/%E7%BB%99%E4%BD%A0%E7%9A%84%E5%A4%A7%E6%9D%80%E5%99%A8%E8%A3%85%E5%A4%87%E6%A0%B8%E5%BC%B9%E2%80%94%E2%80%94Windows%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8GPU%E7%89%88XGBoot%E8%AF%A6%E7%BB%86%E5%8F%82%E8%80%83%E6%8C%87%E5%8D%97/</url>
-      <content type="html"><![CDATA[<p>很早就知道XGBoost支持GPU了，不过一直没有配置，一方面是GPU版本的xgb配置，中文安装教程根本找不到，还有就是支持GPU的xgb还不是稳定版的。<br>花了两天时间踩遍各种坑，特意整理好这个教程，方便各位。</p>
-<h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><p>这应该算是第一个坑，我的电脑在装tensorflow的时候就已经配置好CUDA了，看了下官方文档</p>
-<blockquote>
-<p><strong>Windows requirements</strong> for GPU build: only Visual C++ 2015 or 2013 with CUDA v8.0 were fully tested. Either install Visual C++ 2015 Build Tools separately, or as a part of Visual Studio 2015.</p>
-</blockquote>
-<p>刚好我电脑上已经装好了VS2015还有CUDA v8.0，结果在下面的构建过程中炸了，各种尝试后，装了最新版的CUDA v9.0，再也没有出过问题。</p>
-<h2 id="构建XGBoost"><a href="#构建XGBoost" class="headerlink" title="构建XGBoost"></a>构建XGBoost</h2><h3 id="先说下官网的教程"><a href="#先说下官网的教程" class="headerlink" title="先说下官网的教程"></a>先说下官网的教程</h3><p>官网教程链接 <a href="http://xgboost.readthedocs.io/en/latest/build.html" target="_blank" rel="external">http://xgboost.readthedocs.io/en/latest/build.html</a></p>
-<blockquote>
-<p>github上clone源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/dmlc/xgboost</div></pre></td></tr></table></figure></p>
-<p>在根目录下新建文件夹build，并进入该文件夹执行cmake相关命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake .. -G&quot;Visual Studio 14 2015 Win64&quot; -DUSE_CUDA=ON</div></pre></td></tr></table></figure></p>
-<p>然后cmake构建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cmake --build . --target xgboost --config Release</div></pre></td></tr></table></figure></p>
-<p>最后安装python包<br>进入python-package目录安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ..\python-package</div><div class="line">python setup.py install</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>注意</p>
-<ul>
-<li>cmake需要事先安装好，下载地址 <a href="https://cmake.org/download/" target="_blank" rel="external">https://cmake.org/download/</a> ，下载对应的msi文件，直接安装就好了</li>
-<li>根据你电脑的VS版本来更改<strong>Visual Studio 14 2015 Win64</strong>，比如你电脑上装的是vs2013的，就应该改为<strong>Visual Studio 12 2013 Win64</strong></li>
-<li>如果命令报错，别手动输入，直接复制去执行，还有问题那就继续往下看我的方法</li>
-</ul>
-<h3 id="接下来是我自己的方法"><a href="#接下来是我自己的方法" class="headerlink" title="接下来是我自己的方法"></a>接下来是我自己的方法</h3><ol>
-<li><p>克隆最新的xgboost源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/dmlc/xgboost</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装CMake<br><a href="https://cmake.org/download/" target="_blank" rel="external">https://cmake.org/download/</a><br>下载Windows的msi文件，直接安装</p>
-</li>
-<li><p>生成构建文件<br>打开桌面的<code>CMake (cmake-gui)</code><br>分别选择源码目录以及源码目录下的build文件夹(没有就新建一个)<br><img src="http://i64.tinypic.com/2cf9j84.png" alt=""><br>点击<code>Configure</code>，选择<code>Yes</code>，然后选择自己的VS版本，点击<code>Finish</code>结束<br><img src="http://i63.tinypic.com/207rgut.png" alt=""><br>然后你会发现一片红，这不是错误的意思，不用担心，把USE_CUDA勾上<br><img src="http://i66.tinypic.com/i3gdoj.png" alt=""><br>再点击<code>Configure</code><br><img src="http://i68.tinypic.com/wbqk5y.png" alt=""><br>啥也不管再来<code>Configure</code>!! 发现没有红的了，就说明Configure结束了<br><img src="http://i67.tinypic.com/ak973o.png" alt=""><br>点击<code>Generate</code>，你会发现<code>build</code>文件夹下多了vs的工程文件<br><img src="http://i63.tinypic.com/315xy6v.png" alt=""></p>
-</li>
-<li><p>开始构建<br>在<strong>CMake GUI</strong>中，点击<code>Open Project</code>，会自动调用VS打开工程，直接右键<code>生成解决方案</code>等待就好了,大概十分钟左右<br><img src="http://i64.tinypic.com/n2ddlu.png" alt=""><br>中途会出现各种<em>锟斤拷</em>，不必理会，只要最后不报错就成<br><img src="http://i67.tinypic.com/zmmtz5.png" alt=""></p>
-</li>
-<li><p>安装Python包<br>进入python-package目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ..\python-package</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="开跑"><a href="#开跑" class="headerlink" title="开跑"></a>开跑</h2><p>官方提供了一个基准(Benchmarks)</p>
-<blockquote>
-<p>Training time time on 1,000,000 rows x 50 columns with 500 boosting iterations and 0.25/0.75 test/train split on i7-6700K CPU @ 4.00GHz and Pascal Titan X.</p>
-<p>i7-6700K的CPU（4.00GHz）和Pascal Titan X，数据集大小为 1,000,000行 x 50列，按0.25/0.75划分测试集和训练集，训练时间如下</p>
-<table>
-<thead>
-<tr>
-<th>tree_method</th>
-<th>Time (s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gpu_hist</td>
-<td>13.87</td>
-</tr>
-<tr>
-<td>hist</td>
-<td>63.55</td>
-</tr>
-<tr>
-<td>gpu_exact</td>
-<td>161.08</td>
-</tr>
-<tr>
-<td>exact</td>
-<td>1082.20</td>
-</tr>
-</tbody>
-</table>
-</blockquote>
-<p>我拿我自己的机器尝试了一下，E3-1230V5 CPU (3.40GHz)，GTX 1060 GPU<br>在<code>tests\benchmark</code>目录下<br>分别执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">python benchmark.py --tree_method gpu_hist</div><div class="line">python benchmark.py --tree_method hist</div><div class="line">python benchmark.py --tree_method gpu_exact</div><div class="line">python benchmark.py --tree_method exact</div></pre></td></tr></table></figure></p>
-<p>训练时间如下</p>
-<table>
-<thead>
-<tr>
-<th>tree_method</th>
-<th>Time (s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gpu_hist</td>
-<td>23.32</td>
-</tr>
-<tr>
-<td>hist</td>
-<td>57.34</td>
-</tr>
-<tr>
-<td>gpu_exact</td>
-<td>237.32</td>
-</tr>
-<tr>
-<td>exact</td>
-<td>689.52</td>
-</tr>
-</tbody>
-</table>
-<p>吃惊！CPU性能爆炸！<br>(⊙﹏⊙) 我的E3咋这么快呢。。。<br>暂时不管了，反正快也不是啥坏事。。。。</p>
-<p><strong>总的来说，训练时间缩短了不少</strong></p>
-<p>顺带一提，跑的过程中如果没有报错，那说明你安装是成功的，<strong>要是炸了，重头看看哪里出了问题吧~</strong></p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>大体上和以前没区别，只要把 <em>tree_method</em> 改为 <em>gpu_hist</em> 或者 <em>gpu_exact</em> 就行<br>两者的区别可以简单归为：gpu_exact准确，但耗时耗内存，gpu_hist速度快，但不那么准确</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">param[&apos;gpu_id&apos;] = 0</div><div class="line">param[&apos;tree_method&apos;] = &apos;gpu_hist&apos; # or &apos;gpu_exact&apos;</div></pre></td></tr></table></figure>
-<p>如果有多个GPU，想要让指定GPU跑，那就改下gpu_id，至于多卡一起跑，我暂时还没设备，以后有机会再更新吧</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>大杀器配上核弹，效果棒极了！</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.picnet.com.au/blogs/guido/post/2016/09/22/how-to-build-xgboost-on-windows/" target="_blank" rel="external">How to build XGBoost on Windows – Now with GPU support</a><br><a href="http://xgboost.readthedocs.io/en/latest/build.html#building-with-gpu-support" target="_blank" rel="external">Installation Guide &mdash; xgboost 0.6 documentation</a><br><a href="https://xgboost.readthedocs.io/en/latest/gpu/index.html" target="_blank" rel="external">XGBoost GPU Support &mdash; xgboost 0.6 documentation</a><br><a href="http://xgboost.readthedocs.io/en/latest/parameter.html" target="_blank" rel="external">XGBoost Parameters &mdash; xgboost 0.6 documentation</a></p>
-]]></content>
-      
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[目标！半天学完《Spark快速大数据分析》核心概念]]></title>
-      <url>/2017/08/11/%E7%9B%AE%E6%A0%87%EF%BC%81%E5%8D%8A%E5%A4%A9%E5%AD%A6%E5%AE%8C%E3%80%8ASpark%E5%BF%AB%E9%80%9F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/</url>
-      <content type="html"><![CDATA[<p>在写下这个标题的时候已经下午了，看来只有半天时间了（汗</p>
-<h2 id="初衷以及Spark简介"><a href="#初衷以及Spark简介" class="headerlink" title="初衷以及Spark简介"></a>初衷以及Spark简介</h2><p>最近找工作，发现很多公司都要求Hadoop、Spark，我平时也没有啥这方面的需求所以没学，而且这个东西真正用起来需要分布式集群。<br>于是买了本书《Spark快速大数据分析》，挺薄的，而且是三种语言写的(java,scala,python)，如果只看Python，目测一天就能学完核心概念。<br><img src="https://i.loli.net/2017/08/11/598d802716a6e.jpg" alt="s28300707.jpg"></p>
-<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>学习一门新技术，环境配置估计就能把一堆人卡死在门外，不过这也意味着<strong>环境配好你也就离成功不远了</strong>，想想就有点小激动。</p>
-<h3 id="下载Spark"><a href="#下载Spark" class="headerlink" title="下载Spark"></a>下载Spark</h3><p>下载地址<br><a href="https://spark.apache.org/downloads.html" target="_blank" rel="external">https://spark.apache.org/downloads.html</a><br>书上是<strong>spark 1.2</strong>，包类型为<strong>hadoop 2.4</strong><br>不过最新版是<strong>spark 2.2</strong>，包类型为<strong>hadoop 2.7</strong><br>于是就下了最新版，<strong>一般来说，不按照教程的版本会出现各种问题</strong></p>
-<p>仔细看了书上的配置教程，好像也没做啥事，也就解压运行<code>bin\pyspark</code>，然后正常用。<br>我照着做果然报错了，这和书上说的不一样。</p>
-<h3 id="原来还需要Hadoop"><a href="#原来还需要Hadoop" class="headerlink" title="原来还需要Hadoop"></a>原来还需要Hadoop</h3><p><img src="https://i.loli.net/2017/08/11/598d8029c4c0f.jpg" alt="1502444955505.jpg"><br>这就尴尬了，书上也没说咋配，于是参考了<a href="http://blog.csdn.net/yiyouxian/article/details/51020334" target="_blank" rel="external">这篇</a>，还是很简单的过程。</p>
-<blockquote>
-<p>新建环境变量SPARK_HOME值为spark根目录<br>新建环境变量HADOOP_HOME值为hadoop根目录<br>spark下的bin目录和hadoop下的bin目录添加到系统变量path里</p>
-</blockquote>
-<p>然后运行<code>pyspark</code></p>
-<h3 id="果然还是报错了"><a href="#果然还是报错了" class="headerlink" title="果然还是报错了"></a>果然还是报错了</h3><p>参考了<a href="http://www.jianshu.com/p/7b325155edab" target="_blank" rel="external">这篇</a>解决了<br>原来是缺少<code>winutils.exe</code>这个文件，应该是<code>hadoop\bin</code>目录下的，需要到<a href="https://github.com/steveloughran/winutils" target="_blank" rel="external">https://github.com/steveloughran/winutils</a> 下载<br>然后执行命令来修改权限<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">winutils chmod 777 /tmp/hive</div></pre></td></tr></table></figure></p>
-<h3 id="终于解决了"><a href="#终于解决了" class="headerlink" title="终于解决了"></a>终于解决了</h3><p>直接执行命令<code>pyspark</code><br>再顺带跑个书上的例子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lines = sc.textFile(<span class="string">'README.md'</span>) <span class="comment">#创建一个名为lines的RDD</span></div><div class="line">lines.count() <span class="comment">#统计RDD中的元素个数</span></div><div class="line">lines.first() <span class="comment">#这个RDD的第一个元素，也就是这个文件的第一行</span></div></pre></td></tr></table></figure></p>
-<p><img src="https://i.loli.net/2017/08/11/598d8029cc19f.png" alt="草图.png"></p>
-<p>顺带说下，可以直接在正常的python ide里面运行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line">sc = SparkContext(<span class="string">'local'</span>)</div><div class="line">lines = sc.textFile(<span class="string">'README.md'</span>) <span class="comment">#创建一个名为lines的RDD</span></div><div class="line">lines.count() <span class="comment">#统计RDD中的元素个数</span></div><div class="line">lines.first() <span class="comment">#这个RDD的第一个元素，也就是这个文件的第一行</span></div></pre></td></tr></table></figure></p>
-<h2 id="RDD是个啥"><a href="#RDD是个啥" class="headerlink" title="RDD是个啥"></a>RDD是个啥</h2><p>弹性分布式数据集(Resilient Distributed Datasets)就是一种对数据的抽象，你不用去管底层数据是咋存放的，也不用管那些操作放到底层咋实现的，Spark会自动帮你做好一切，RDD就是Spark的核心。</p>
-<p>RDD三种常见操作分为创建、转化以及行动。</p>
-<h3 id="创建操作"><a href="#创建操作" class="headerlink" title="创建操作"></a>创建操作</h3><p>有两种创建方法，一种是textFile，也就是从本地文件读取，还有一种是parallelize，将传入的集合并行化。<br>textFile上面已经有了，下面是parallelize的代码。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line">sc = SparkContext(<span class="string">'local'</span>)</div><div class="line">lines = sc.parallelize([<span class="string">'hello'</span>,<span class="string">'world'</span>,<span class="string">'!'</span>]) <span class="comment">#传入了一个list</span></div></pre></td></tr></table></figure></p>
-<p>这就是创建好了，暂时不知道啥用，接着往下看。</p>
-<h3 id="转化操作"><a href="#转化操作" class="headerlink" title="转化操作"></a>转化操作</h3><p>转化操作，一般有map,filter,union等操作，也就是会返回一个RDD，不会产生实际计算，也就是<strong>惰性求值</strong>。<br>接着上面的parallelize继续写一个转化操作的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Olines = lines.filter(lambda x:&apos;o&apos; in x) # 根据传入的函数来筛选</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>如果传入函数里包含对象成员，spark会把整个对象传过去，所以最好先单独放到一个局部变量里。</p>
-</blockquote>
-<h3 id="行动操作"><a href="#行动操作" class="headerlink" title="行动操作"></a>行动操作</h3><p>行动操作需要返回计算机结果，比如count,take,collect等，每一次都是从头计算。<br>继续接上面的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">print(&apos;lines has &apos;,lines.count(),&apos; elements.&apos;)</div><div class="line">for line in lines.collect():</div><div class="line">	print(line)</div><div class="line">print(&apos;Olines has &apos;,Olines.count(),&apos; elements.&apos;)</div><div class="line">for Oline in Olines.collect():</div><div class="line">	print(Oline)</div></pre></td></tr></table></figure></p>
-<p>全部执行结果如下<br><img src="http://i.imgur.com/JKXHGsG.png" alt=""></p>
-<blockquote>
-<p>由于转化操作不会计算，所以出错了也未必知道，这里可以简单调用count()方法，通过计算元素个数来简单测试</p>
-</blockquote>
-<h3 id="转化操作和行动操作的区别"><a href="#转化操作和行动操作的区别" class="headerlink" title="转化操作和行动操作的区别"></a>转化操作和行动操作的区别</h3><ol>
-<li>转化操作返回值是RDD，行动操作的返回值则是其他类型</li>
-<li><strong>转化操作并不会真正计算，甚至读取数据也没执行</strong>，Spark内部是使用谱系图(lineage graph)来记录他们之间的关系的，而行动操作会从读取数据开始执行，也就是<strong>每次都是从头计算</strong></li>
-</ol>
-<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>上面提到的转化操作<strong>惰性求值</strong>，会导致每次行动操作都要重新计算一遍，这样会大大浪费计算资源。<br>这里Spark提供一种名为持久化的方法，持久化可以让RDD的数据存储于内存中，方便重复使用。<br>RDD对象直接调用persist或者cache，两者的区别在于cache只有一个默认的缓存级别，而persist可以设置其它缓存级别。</p>
-<h2 id="Spark的MapReduce"><a href="#Spark的MapReduce" class="headerlink" title="Spark的MapReduce"></a>Spark的MapReduce</h2><p>通过求平均值这个小例子简单介绍一下几个转化操作和行动操作的用法</p>
-<p>这是第一种，用flatMap和reduce结合，flatMap把一个list里面的数字提取出来并且结构化为(sum,count)的形式，方便reduce计算<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line">sc = SparkContext(<span class="string">'local'</span>)</div><div class="line">nums = sc.parallelize([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>],[<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>]])</div><div class="line">nums = nums.flatMap(<span class="keyword">lambda</span> x:[(a,<span class="number">1</span>) <span class="keyword">for</span> a <span class="keyword">in</span> x])</div><div class="line">result = nums.reduce(<span class="keyword">lambda</span> x,y:(x[<span class="number">0</span>]+y[<span class="number">0</span>],x[<span class="number">1</span>]+y[<span class="number">1</span>]))</div><div class="line">result = <span class="number">1.0</span>*result[<span class="number">0</span>]/result[<span class="number">1</span>]</div></pre></td></tr></table></figure></p>
-<p>这是第二种，用flatMap和aggregate结合，flatMap只是把list中的数字提取出来，aggregate一共有三个参数，第一个参数是初始化的累加器，每个节点一个累加器，第二个参数是一个函数，进行的是累加器与每个值之间的操作，第三个参数是也是一个函数，当执行完第二个参数后，进行累加器之间的操作。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">nums = sc.parallelize([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>],[<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>]])</div><div class="line">nums = nums.flatMap(<span class="keyword">lambda</span> x:[a <span class="keyword">for</span> a <span class="keyword">in</span> x]) <span class="comment">#把每个值提取出来</span></div><div class="line">result = nums.aggregate((<span class="number">0</span>,<span class="number">0</span>),  <span class="comment">#设置累加器初始值</span></div><div class="line">                        (<span class="keyword">lambda</span> acc,value: (acc[<span class="number">0</span>]+value,acc[<span class="number">1</span>]+<span class="number">1</span>)),</div><div class="line">                        (<span class="keyword">lambda</span> acc1,acc2: (acc1[<span class="number">0</span>]+acc2[<span class="number">0</span>],acc1[<span class="number">1</span>]+acc2[<span class="number">1</span>]))</div><div class="line">                        )</div><div class="line">result = <span class="number">1.0</span>*result[<span class="number">0</span>]/result[<span class="number">1</span>]</div></pre></td></tr></table></figure></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Spark功能强大，编程思路与正常的单机数据处理略有不同，虽然接触了半天，但也算是弄懂了一些核心概念，收获不错。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>配置方面<br><a href="https://spark.apache.org/downloads.html" target="_blank" rel="external">https://spark.apache.org/downloads.html</a><br><a href="http://blog.csdn.net/yiyouxian/article/details/51020334" target="_blank" rel="external">http://blog.csdn.net/yiyouxian/article/details/51020334</a><br><a href="http://www.jianshu.com/p/7b325155edab" target="_blank" rel="external">http://www.jianshu.com/p/7b325155edab</a><br><a href="http://blog.csdn.net/ydq1206/article/details/51922148" target="_blank" rel="external">http://blog.csdn.net/ydq1206/article/details/51922148</a><br>持久化<br><a href="http://www.ccblog.cn/102.htm" target="_blank" rel="external">http://www.ccblog.cn/102.htm</a><br><a href="http://blog.csdn.net/houmou/article/details/52491419" target="_blank" rel="external">http://blog.csdn.net/houmou/article/details/52491419</a></p>
-]]></content>
-      
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[利用Captcha生成验证码]]></title>
-      <url>/2017/07/31/%E5%88%A9%E7%94%A8Captcha%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81/</url>
-      <content type="html"><![CDATA[<p>Captcha是一个专门生成验证码的库，可以生成语音验证码和图像验证码。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2>]]></content>
-      
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Hexo NexT 添加小功能]]></title>
-      <url>/2017/07/29/Hexo-NexT-%E6%B7%BB%E5%8A%A0%E5%B0%8F%E5%8A%9F%E8%83%BD/</url>
-      <content type="html"><![CDATA[<p>接上文<a href="/2017/07/25/先从我怎么搭建这个博客开始吧/" title="先从我怎么搭建这个博客开始吧">先从我怎么搭建这个博客开始吧</a></p>
-<p>之前搭建完只有基础功能，十分简单，但Hexo功能非常强大，可以给博客增加不少实用的功能。</p>
-<h2 id="Next主题"><a href="#Next主题" class="headerlink" title="Next主题"></a>Next主题</h2><p>就是我的博客目前使用的，<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">http://theme-next.iissnan.com/</a> ，可以很方便地使用一些第三方服务，这次增加小功能也是利用这一点。</p>
-<h2 id="增加评论功能"><a href="#增加评论功能" class="headerlink" title="增加评论功能"></a>增加评论功能</h2><p>评论功能可以让内容更丰富，可以让访客留下评论和建议，便于博客地改进以及优化。<br>本来打算使用多说地，后来发现已经关闭了，抱着偷懒之上的原则，我用了disqus，配置过程如下。</p>
-<h3 id="注册一个账号"><a href="#注册一个账号" class="headerlink" title="注册一个账号"></a>注册一个账号</h3><p><a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a><br>步骤比较简单，就不说了。</p>
-<h3 id="定一个shortname"><a href="#定一个shortname" class="headerlink" title="定一个shortname"></a>定一个shortname</h3><p>填写自己的网站，然后再填写一个自定义的shortname</p>
-<h3 id="编辑主题配置文件"><a href="#编辑主题配置文件" class="headerlink" title="编辑主题配置文件"></a>编辑<code>主题配置文件</code></h3><p>将 disqus 下的 enable 设定为 true，同时提供您的 shortname。count 用于指定是否显示评论数量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">disqus:</div><div class="line">  enable: false</div><div class="line">  shortname:</div><div class="line">  count: true</div></pre></td></tr></table></figure></p>
-<h2 id="增加分享功能"><a href="#增加分享功能" class="headerlink" title="增加分享功能"></a>增加分享功能</h2><p>分享方便网站推广，看见好文章就喜欢分享，算是人的天性吧hhh。JiaThis配置比较简单，改动很少，嗯就这个不错。</p>
-<h3 id="编辑主题配置文件-1"><a href="#编辑主题配置文件-1" class="headerlink" title="编辑主题配置文件"></a>编辑<code>主题配置文件</code></h3><p>添加/修改字段 jiathis，值为 true。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># JiaThis 分享服务</div><div class="line">jiathis: true</div></pre></td></tr></table></figure></p>
-<h2 id="增加搜索功能"><a href="#增加搜索功能" class="headerlink" title="增加搜索功能"></a>增加搜索功能</h2><p>搜索功能真心好用，当文章多起来的时候，标签提供的作用已经很少了，只能简单索引，搜索却能精确查找，这里我用的依旧是最简单的本地站内搜索。</p>
-<h3 id="安装hexo-generator-searchdb"><a href="#安装hexo-generator-searchdb" class="headerlink" title="安装hexo-generator-searchdb"></a>安装hexo-generator-searchdb</h3><p>在站点的根目录下执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-searchdb --save</div></pre></td></tr></table></figure></p>
-<h3 id="配置站点配置文件"><a href="#配置站点配置文件" class="headerlink" title="配置站点配置文件"></a>配置<code>站点配置文件</code></h3><p>新增以下内容到任意位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">search:</div><div class="line">  path: search.xml</div><div class="line">  field: post</div><div class="line">  format: html</div><div class="line">  limit: 10000</div></pre></td></tr></table></figure></p>
-<h3 id="配置主题配置文件"><a href="#配置主题配置文件" class="headerlink" title="配置主题配置文件"></a>配置<code>主题配置文件</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># Local search</div><div class="line">local_search:</div><div class="line">  enable: true</div></pre></td></tr></table></figure>
-<h2 id="常见错误解决方法"><a href="#常见错误解决方法" class="headerlink" title="常见错误解决方法"></a>常见错误解决方法</h2><p>配置完记得先<code>hexo clean</code>，再<code>hexo generate</code>。<br>大多数报错我是看不懂的，因为不懂node.js，采取的解决措施也比较简单，那就是撤销之前的步骤，很管用~~</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://theme-next.iissnan.com/third-party-services.html" target="_blank" rel="external">http://theme-next.iissnan.com/third-party-services.html</a><br><a href="http://blog.csdn.net/u010053344/article/details/50701191" target="_blank" rel="external">http://blog.csdn.net/u010053344/article/details/50701191</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> 搭建博客 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[KDD CUP 2015 赛题回顾]]></title>
-      <url>/2017/07/27/KDD-CUP-2015-%E8%B5%9B%E9%A2%98%E5%9B%9E%E9%A1%BE/</url>
-      <content type="html"><![CDATA[<p>先随便写点东西吧</p>
-<h2 id="数据集可视化"><a href="#数据集可视化" class="headerlink" title="数据集可视化"></a>数据集可视化</h2><p>可视化算是了解数据集的一部分，可以很好地去把握自己对数据地敏感，观察数据的分布也会对做特征有帮助。</p>
-<h3 id="Tableau"><a href="#Tableau" class="headerlink" title="Tableau"></a>Tableau</h3><p>具体操作不好描述，反正就是看完官方教程就会做点简单的图了，稍加摸索也能画的有模有样。<br><img src="http://i.imgur.com/07HI9dk.png" alt=""></p>
-<p>完整版地址<br><a href="https://public.tableau.com/profile/terryga#!/vizhome/KDDCUP2015MOOCdropoutprediction/sheet7" target="_blank" rel="external">https://public.tableau.com/profile/terryga#!/vizhome/KDDCUP2015MOOCdropoutprediction/sheet7</a><br>这里就顺带说个小缺陷吧，没法很顺手地数据分析，或许是习惯了pandas各种命令了，一些简单地统计量通过按钮也不好实现。<br>Tableau这个软件感觉更适合做报表，反正就是挺有趣地啦。<br>下一个要挑战的是Seaborn可视化，这个库在Kaggle里面用得比较多，估计我要把这个当作重点来学习了。</p>
-<h3 id="seaborn"><a href="#seaborn" class="headerlink" title="seaborn"></a>seaborn</h3>]]></content>
-      
-        <categories>
-            
-            <category> 比赛回顾 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Tableau </tag>
-            
-            <tag> 可视化 </tag>
-            
-            <tag> KDD CUP </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Tableau 可视化初体验]]></title>
-      <url>/2017/07/26/Tableau-%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-      <content type="html"><![CDATA[<p>Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>这是public版，输入邮箱就能下载安装了<br><a href="https://public.tableau.com/s/" target="_blank" rel="external">https://public.tableau.com/s/</a><br><img src="http://i.imgur.com/2gq0Tf4.png" alt=""><br>还有收费版，通过<strong>时间驻留器</strong>就能无限试用，这里不推荐，还是要支持正版的</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p>刚开始进入程序需要导入数据<br><img src="http://i.imgur.com/pf19EGc.png" alt=""><br>支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV，CSV的本质就是<strong>字符分隔值</strong>，所以选择文本文件<br>因为只有单个文件train.csv所以不需要进行数据拼接操作<br><img src="http://i.imgur.com/AwfwTcI.png" alt=""></p>
-<h3 id="绘制图表"><a href="#绘制图表" class="headerlink" title="绘制图表"></a>绘制图表</h3><p>绘制图表就是这个软件的核心了，通过将左侧的数据拖拽至右侧，可以很方便地构建需要地图表。<br><img src="http://i.imgur.com/WqueNvn.png" alt=""><br>这里简单地把Sex拖动到行Survived拖动至列，然后把Sex拖到颜色让图表更好看。</p>
-<h3 id="绘制仪表盘"><a href="#绘制仪表盘" class="headerlink" title="绘制仪表盘"></a>绘制仪表盘</h3><p>仪表盘简单来说就是把多个图表放在一页，使用方法依旧是拖动。<br><img src="http://i.imgur.com/6wJQml3.png" alt=""></p>
-<h3 id="绘制故事"><a href="#绘制故事" class="headerlink" title="绘制故事"></a>绘制故事</h3><p>这个名字取得比较诡异，功能相当于给仪表盘或者图表配文字。<br><img src="http://i.imgur.com/udXuwyQ.png" alt=""></p>
-<h3 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h3><p>如果用的是免费版，恭喜了，你只能在线存储，而且存储速度略慢，不保存下次打开就什么都没有了。对了，保存了再下载下来很容易出错，这个很让人蛋疼，所以。。。你看着办吧。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>总结一下，Tableau的使用还是很方便的，全是靠拖拽，如果操作不当还可以<code>Ctrl+Z</code>撤销，这次简单的初体验没有使用到高级功能，所以还没法做出特别酷炫的图表。</p>
-<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>Tableau网上的教程还是挺少的，主要是看官方的免费教程<br><a href="https://www.tableau.com/zh-cn/learn/training" target="_blank" rel="external">https://www.tableau.com/zh-cn/learn/training</a><br>还有就是Coursera的Data Visualization with Tableau 专项课程<br><a href="https://www.coursera.org/specializations/data-visualization" target="_blank" rel="external">https://www.coursera.org/specializations/data-visualization</a><br>这个课程也是免费的，申请旁听就好了</p>
-<p>还有就是多看看别人做的可视化，每日精选啥的，找点灵感<br><a href="https://public.tableau.com/zh-cn/s/gallery" target="_blank" rel="external">https://public.tableau.com/zh-cn/s/gallery</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Tableau入门到精通 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Tableau </tag>
-            
-            <tag> 可视化 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[先从我怎么搭建这个博客开始吧]]></title>
-      <url>/2017/07/25/%E5%85%88%E4%BB%8E%E6%88%91%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%A7%8B%E5%90%A7/</url>
-      <content type="html"><![CDATA[<h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>node.js<br>git</p>
-<p>然后在命令行输入如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">npm install</div><div class="line">hexo server</div></pre></td></tr></table></figure></p>
-<p>浏览器里打开<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就能看见了</p>
-<h2 id="主题安装【可选】"><a href="#主题安装【可选】" class="headerlink" title="主题安装【可选】"></a>主题安装【可选】</h2><p><a href="https://material.viosey.com/start/" target="_blank" rel="external">https://material.viosey.com/start/</a></p>
-<h2 id="上传到github"><a href="#上传到github" class="headerlink" title="上传到github"></a>上传到github</h2><h3 id="配置github"><a href="#配置github" class="headerlink" title="配置github"></a>配置github</h3><p>New repository 名字为 你的github名字.github.io<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</div></pre></td></tr></table></figure></p>
-<p>生成id_rsa和id_rsa.pub两个文件</p>
-<p>把id_rsa.pub添加到github里面</p>
-<h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><p>打开<code>_config.yml</code><br>修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: git@github.com:xx/xx.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<h3 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;标题&quot;</div></pre></td></tr></table></figure>
-<p>然后在<code>source\_posts</code>目录里面找到<code>标题.md</code><br>编辑好内容后 执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
-<p>生成静态页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server --debug</div></pre></td></tr></table></figure></p>
-<p>进行本地调试</p>
-<h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>觉得差不多就直接上传吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> 搭建博客 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
-    </entry>
-    
-  
-  
+<search>
+  <entry>
+    <title><![CDATA[给你的大杀器装备核弹——Windows下安装使用GPU版XGBoot详细参考指南]]></title>
+    <url>%2F2017%2F10%2F06%2F%E7%BB%99%E4%BD%A0%E7%9A%84%E5%A4%A7%E6%9D%80%E5%99%A8%E8%A3%85%E5%A4%87%E6%A0%B8%E5%BC%B9%E2%80%94%E2%80%94Windows%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8GPU%E7%89%88XGBoot%E8%AF%A6%E7%BB%86%E5%8F%82%E8%80%83%E6%8C%87%E5%8D%97%2F</url>
+    <content type="text"><![CDATA[很早就知道XGBoost支持GPU了，不过一直没有配置，一方面是GPU版本的xgb配置，中文安装教程根本找不到，还有就是支持GPU的xgb还不是稳定版的。花了两天时间踩遍各种坑，特意整理好这个教程，方便各位。 安装CUDA这应该算是第一个坑，我的电脑在装tensorflow的时候就已经配置好CUDA了，看了下官方文档 Windows requirements for GPU build: only Visual C++ 2015 or 2013 with CUDA v8.0 were fully tested. Either install Visual C++ 2015 Build Tools separately, or as a part of Visual Studio 2015. 刚好我电脑上已经装好了VS2015还有CUDA v8.0，结果在下面的构建过程中炸了，各种尝试后，装了最新版的CUDA v9.0，再也没有出过问题。 构建XGBoost先说下官网的教程官网教程链接 http://xgboost.readthedocs.io/en/latest/build.html github上clone源码1git clone --recursive https://github.com/dmlc/xgboost 在根目录下新建文件夹build，并进入该文件夹执行cmake相关命令123mkdir buildcd buildcmake .. -G&quot;Visual Studio 14 2015 Win64&quot; -DUSE_CUDA=ON 然后cmake构建1cmake --build . --target xgboost --config Release 最后安装python包进入python-package目录安装12cd ..\python-packagepython setup.py install 注意 cmake需要事先安装好，下载地址 https://cmake.org/download/ ，下载对应的msi文件，直接安装就好了 根据你电脑的VS版本来更改Visual Studio 14 2015 Win64，比如你电脑上装的是vs2013的，就应该改为Visual Studio 12 2013 Win64 如果命令报错，别手动输入，直接复制去执行，还有问题那就继续往下看我的方法 接下来是我自己的方法 克隆最新的xgboost源码 1git clone --recursive https://github.com/dmlc/xgboost 安装CMakehttps://cmake.org/download/下载Windows的msi文件，直接安装 生成构建文件打开桌面的CMake (cmake-gui)分别选择源码目录以及源码目录下的build文件夹(没有就新建一个)点击Configure，选择Yes，然后选择自己的VS版本，点击Finish结束然后你会发现一片红，这不是错误的意思，不用担心，把USE_CUDA勾上再点击Configure啥也不管再来Configure!! 发现没有红的了，就说明Configure结束了点击Generate，你会发现build文件夹下多了vs的工程文件 开始构建在CMake GUI中，点击Open Project，会自动调用VS打开工程，直接右键生成解决方案等待就好了,大概十分钟左右中途会出现各种锟斤拷，不必理会，只要最后不报错就成 安装Python包进入python-package目录 12cd ..\python-packagepython setup.py install 开跑官方提供了一个基准(Benchmarks) Training time time on 1,000,000 rows x 50 columns with 500 boosting iterations and 0.25/0.75 test/train split on i7-6700K CPU @ 4.00GHz and Pascal Titan X. i7-6700K的CPU（4.00GHz）和Pascal Titan X，数据集大小为 1,000,000行 x 50列，按0.25/0.75划分测试集和训练集，训练时间如下 tree_method Time (s) gpu_hist 13.87 hist 63.55 gpu_exact 161.08 exact 1082.20 我拿我自己的机器尝试了一下，E3-1230V5 CPU (3.40GHz)，GTX 1060 GPU在tests\benchmark目录下分别执行1234python benchmark.py --tree_method gpu_histpython benchmark.py --tree_method histpython benchmark.py --tree_method gpu_exactpython benchmark.py --tree_method exact 训练时间如下 tree_method Time (s) gpu_hist 23.32 hist 57.34 gpu_exact 237.32 exact 689.52 吃惊！CPU性能爆炸！(⊙﹏⊙) 我的E3咋这么快呢。。。暂时不管了，反正快也不是啥坏事。。。。 总的来说，训练时间缩短了不少 顺带一提，跑的过程中如果没有报错，那说明你安装是成功的，要是炸了，重头看看哪里出了问题吧~ 使用方法大体上和以前没区别，只要把 tree_method 改为 gpu_hist 或者 gpu_exact 就行两者的区别可以简单归为：gpu_exact准确，但耗时耗内存，gpu_hist速度快，但不那么准确 12param[&apos;gpu_id&apos;] = 0param[&apos;tree_method&apos;] = &apos;gpu_hist&apos; # or &apos;gpu_exact&apos; 如果有多个GPU，想要让指定GPU跑，那就改下gpu_id，至于多卡一起跑，我暂时还没设备，以后有机会再更新吧 总结大杀器配上核弹，效果棒极了！ 参考How to build XGBoost on Windows – Now with GPU supportInstallation Guide &mdash; xgboost 0.6 documentationXGBoost GPU Support &mdash; xgboost 0.6 documentationXGBoost Parameters &mdash; xgboost 0.6 documentation]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[目标！半天学完《Spark快速大数据分析》核心概念]]></title>
+    <url>%2F2017%2F08%2F11%2F%E7%9B%AE%E6%A0%87%EF%BC%81%E5%8D%8A%E5%A4%A9%E5%AD%A6%E5%AE%8C%E3%80%8ASpark%E5%BF%AB%E9%80%9F%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E3%80%8B%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[在写下这个标题的时候已经下午了，看来只有半天时间了（汗 初衷以及Spark简介最近找工作，发现很多公司都要求Hadoop、Spark，我平时也没有啥这方面的需求所以没学，而且这个东西真正用起来需要分布式集群。于是买了本书《Spark快速大数据分析》，挺薄的，而且是三种语言写的(java,scala,python)，如果只看Python，目测一天就能学完核心概念。 配置环境学习一门新技术，环境配置估计就能把一堆人卡死在门外，不过这也意味着环境配好你也就离成功不远了，想想就有点小激动。 下载Spark下载地址https://spark.apache.org/downloads.html书上是spark 1.2，包类型为hadoop 2.4不过最新版是spark 2.2，包类型为hadoop 2.7于是就下了最新版，一般来说，不按照教程的版本会出现各种问题 仔细看了书上的配置教程，好像也没做啥事，也就解压运行bin\pyspark，然后正常用。我照着做果然报错了，这和书上说的不一样。 原来还需要Hadoop这就尴尬了，书上也没说咋配，于是参考了这篇，还是很简单的过程。 新建环境变量SPARK_HOME值为spark根目录新建环境变量HADOOP_HOME值为hadoop根目录spark下的bin目录和hadoop下的bin目录添加到系统变量path里 然后运行pyspark 果然还是报错了参考了这篇解决了原来是缺少winutils.exe这个文件，应该是hadoop\bin目录下的，需要到https://github.com/steveloughran/winutils 下载然后执行命令来修改权限1winutils chmod 777 /tmp/hive 终于解决了直接执行命令pyspark再顺带跑个书上的例子123lines = sc.textFile('README.md') #创建一个名为lines的RDDlines.count() #统计RDD中的元素个数lines.first() #这个RDD的第一个元素，也就是这个文件的第一行 顺带说下，可以直接在正常的python ide里面运行12345from pyspark import SparkContextsc = SparkContext('local')lines = sc.textFile('README.md') #创建一个名为lines的RDDlines.count() #统计RDD中的元素个数lines.first() #这个RDD的第一个元素，也就是这个文件的第一行 RDD是个啥弹性分布式数据集(Resilient Distributed Datasets)就是一种对数据的抽象，你不用去管底层数据是咋存放的，也不用管那些操作放到底层咋实现的，Spark会自动帮你做好一切，RDD就是Spark的核心。 RDD三种常见操作分为创建、转化以及行动。 创建操作有两种创建方法，一种是textFile，也就是从本地文件读取，还有一种是parallelize，将传入的集合并行化。textFile上面已经有了，下面是parallelize的代码。123from pyspark import SparkContextsc = SparkContext('local')lines = sc.parallelize(['hello','world','!']) #传入了一个list 这就是创建好了，暂时不知道啥用，接着往下看。 转化操作转化操作，一般有map,filter,union等操作，也就是会返回一个RDD，不会产生实际计算，也就是惰性求值。接着上面的parallelize继续写一个转化操作的例子1Olines = lines.filter(lambda x:'o' in x) # 根据传入的函数来筛选 如果传入函数里包含对象成员，spark会把整个对象传过去，所以最好先单独放到一个局部变量里。 行动操作行动操作需要返回计算机结果，比如count,take,collect等，每一次都是从头计算。继续接上面的例子123456print('lines has ',lines.count(),' elements.')for line in lines.collect(): print(line)print('Olines has ',Olines.count(),' elements.')for Oline in Olines.collect(): print(Oline) 全部执行结果如下 由于转化操作不会计算，所以出错了也未必知道，这里可以简单调用count()方法，通过计算元素个数来简单测试 转化操作和行动操作的区别 转化操作返回值是RDD，行动操作的返回值则是其他类型 转化操作并不会真正计算，甚至读取数据也没执行，Spark内部是使用谱系图(lineage graph)来记录他们之间的关系的，而行动操作会从读取数据开始执行，也就是每次都是从头计算 持久化上面提到的转化操作惰性求值，会导致每次行动操作都要重新计算一遍，这样会大大浪费计算资源。这里Spark提供一种名为持久化的方法，持久化可以让RDD的数据存储于内存中，方便重复使用。RDD对象直接调用persist或者cache，两者的区别在于cache只有一个默认的缓存级别，而persist可以设置其它缓存级别。 Spark的MapReduce通过求平均值这个小例子简单介绍一下几个转化操作和行动操作的用法 这是第一种，用flatMap和reduce结合，flatMap把一个list里面的数字提取出来并且结构化为(sum,count)的形式，方便reduce计算123456from pyspark import SparkContextsc = SparkContext('local')nums = sc.parallelize([[1,2,3],[4,5,6],[7,8,9],[10,11,12,13]])nums = nums.flatMap(lambda x:[(a,1) for a in x])result = nums.reduce(lambda x,y:(x[0]+y[0],x[1]+y[1]))result = 1.0*result[0]/result[1] 这是第二种，用flatMap和aggregate结合，flatMap只是把list中的数字提取出来，aggregate一共有三个参数，第一个参数是初始化的累加器，每个节点一个累加器，第二个参数是一个函数，进行的是累加器与每个值之间的操作，第三个参数是也是一个函数，当执行完第二个参数后，进行累加器之间的操作。1234567nums = sc.parallelize([[1,2,3],[4,5,6],[7,8,9],[10,11,12,13]])nums = nums.flatMap(lambda x:[a for a in x]) #把每个值提取出来result = nums.aggregate((0,0), #设置累加器初始值 (lambda acc,value: (acc[0]+value,acc[1]+1)), (lambda acc1,acc2: (acc1[0]+acc2[0],acc1[1]+acc2[1])) )result = 1.0*result[0]/result[1] 小结Spark功能强大，编程思路与正常的单机数据处理略有不同，虽然接触了半天，但也算是弄懂了一些核心概念，收获不错。 参考配置方面https://spark.apache.org/downloads.htmlhttp://blog.csdn.net/yiyouxian/article/details/51020334http://www.jianshu.com/p/7b325155edabhttp://blog.csdn.net/ydq1206/article/details/51922148持久化http://www.ccblog.cn/102.htmhttp://blog.csdn.net/houmou/article/details/52491419]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[利用Captcha生成验证码]]></title>
+    <url>%2F2017%2F07%2F31%2F%E5%88%A9%E7%94%A8Captcha%E7%94%9F%E6%88%90%E9%AA%8C%E8%AF%81%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[Captcha是一个专门生成验证码的库，可以生成语音验证码和图像验证码。 安装]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo NexT 添加小功能]]></title>
+    <url>%2F2017%2F07%2F29%2FHexo-NexT-%E6%B7%BB%E5%8A%A0%E5%B0%8F%E5%8A%9F%E8%83%BD%2F</url>
+    <content type="text"><![CDATA[接上文先从我怎么搭建这个博客开始吧 之前搭建完只有基础功能，十分简单，但Hexo功能非常强大，可以给博客增加不少实用的功能。 Next主题就是我的博客目前使用的，http://theme-next.iissnan.com/ ，可以很方便地使用一些第三方服务，这次增加小功能也是利用这一点。 增加评论功能评论功能可以让内容更丰富，可以让访客留下评论和建议，便于博客地改进以及优化。本来打算使用多说地，后来发现已经关闭了，抱着偷懒之上的原则，我用了disqus，配置过程如下。 注册一个账号https://disqus.com/步骤比较简单，就不说了。 定一个shortname填写自己的网站，然后再填写一个自定义的shortname 编辑主题配置文件将 disqus 下的 enable 设定为 true，同时提供您的 shortname。count 用于指定是否显示评论数量。1234disqus: enable: false shortname: count: true 增加分享功能分享方便网站推广，看见好文章就喜欢分享，算是人的天性吧hhh。JiaThis配置比较简单，改动很少，嗯就这个不错。 编辑主题配置文件添加/修改字段 jiathis，值为 true。12# JiaThis 分享服务jiathis: true 增加搜索功能搜索功能真心好用，当文章多起来的时候，标签提供的作用已经很少了，只能简单索引，搜索却能精确查找，这里我用的依旧是最简单的本地站内搜索。 安装hexo-generator-searchdb在站点的根目录下执行以下命令：1npm install hexo-generator-searchdb --save 配置站点配置文件新增以下内容到任意位置：12345search: path: search.xml field: post format: html limit: 10000 配置主题配置文件123# Local searchlocal_search: enable: true 常见错误解决方法配置完记得先hexo clean，再hexo generate。大多数报错我是看不懂的，因为不懂node.js，采取的解决措施也比较简单，那就是撤销之前的步骤，很管用~~ 参考http://theme-next.iissnan.com/third-party-services.htmlhttp://blog.csdn.net/u010053344/article/details/50701191]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[KDD CUP 2015 赛题回顾]]></title>
+    <url>%2F2017%2F07%2F27%2FKDD-CUP-2015-%E8%B5%9B%E9%A2%98%E5%9B%9E%E9%A1%BE%2F</url>
+    <content type="text"><![CDATA[先随便写点东西吧 数据集可视化可视化算是了解数据集的一部分，可以很好地去把握自己对数据地敏感，观察数据的分布也会对做特征有帮助。 Tableau具体操作不好描述，反正就是看完官方教程就会做点简单的图了，稍加摸索也能画的有模有样。 完整版地址https://public.tableau.com/profile/terryga#!/vizhome/KDDCUP2015MOOCdropoutprediction/sheet7这里就顺带说个小缺陷吧，没法很顺手地数据分析，或许是习惯了pandas各种命令了，一些简单地统计量通过按钮也不好实现。Tableau这个软件感觉更适合做报表，反正就是挺有趣地啦。下一个要挑战的是Seaborn可视化，这个库在Kaggle里面用得比较多，估计我要把这个当作重点来学习了。 seaborn]]></content>
+      <categories>
+        <category>比赛回顾</category>
+      </categories>
+      <tags>
+        <tag>Tableau</tag>
+        <tag>可视化</tag>
+        <tag>KDD CUP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Tableau 可视化初体验]]></title>
+    <url>%2F2017%2F07%2F26%2FTableau-%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%9D%E4%BD%93%E9%AA%8C%2F</url>
+    <content type="text"><![CDATA[Tableau是一款商业型的可视化软件，无需编程基础，只需要拖拽就能很方便地制作出一个精美的而且支持交互的可视化数据。 安装这是public版，输入邮箱就能下载安装了https://public.tableau.com/s/还有收费版，通过时间驻留器就能无限试用，这里不推荐，还是要支持正版的 使用方法导入数据刚开始进入程序需要导入数据支持的格式挺多的，这里拿Titanic数据集来举例，格式为CSV，CSV的本质就是字符分隔值，所以选择文本文件因为只有单个文件train.csv所以不需要进行数据拼接操作 绘制图表绘制图表就是这个软件的核心了，通过将左侧的数据拖拽至右侧，可以很方便地构建需要地图表。这里简单地把Sex拖动到行Survived拖动至列，然后把Sex拖到颜色让图表更好看。 绘制仪表盘仪表盘简单来说就是把多个图表放在一页，使用方法依旧是拖动。 绘制故事这个名字取得比较诡异，功能相当于给仪表盘或者图表配文字。 保存如果用的是免费版，恭喜了，你只能在线存储，而且存储速度略慢，不保存下次打开就什么都没有了。对了，保存了再下载下来很容易出错，这个很让人蛋疼，所以。。。你看着办吧。 小结总结一下，Tableau的使用还是很方便的，全是靠拖拽，如果操作不当还可以Ctrl+Z撤销，这次简单的初体验没有使用到高级功能，所以还没法做出特别酷炫的图表。 进阶Tableau网上的教程还是挺少的，主要是看官方的免费教程https://www.tableau.com/zh-cn/learn/training还有就是Coursera的Data Visualization with Tableau 专项课程https://www.coursera.org/specializations/data-visualization这个课程也是免费的，申请旁听就好了 还有就是多看看别人做的可视化，每日精选啥的，找点灵感https://public.tableau.com/zh-cn/s/gallery]]></content>
+      <categories>
+        <category>Tableau入门到精通</category>
+      </categories>
+      <tags>
+        <tag>Tableau</tag>
+        <tag>可视化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[先从我怎么搭建这个博客开始吧]]></title>
+    <url>%2F2017%2F07%2F25%2F%E5%85%88%E4%BB%8E%E6%88%91%E6%80%8E%E4%B9%88%E6%90%AD%E5%BB%BA%E8%BF%99%E4%B8%AA%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%A7%8B%E5%90%A7%2F</url>
+    <content type="text"><![CDATA[环境安装node.jsgit 然后在命令行输入如下12345npm install hexo-cli -ghexo init blogcd blognpm installhexo server 浏览器里打开http://localhost:4000/ 就能看见了 主题安装【可选】https://material.viosey.com/start/ 上传到github配置githubNew repository 名字为 你的github名字.github.io1ssh-keygen -t rsa -C &quot;youremail@example.com&quot; 生成id_rsa和id_rsa.pub两个文件 把id_rsa.pub添加到github里面 配置hexo打开_config.yml修改如下1234deploy: type: git repo: git@github.com:xx/xx.github.io.git branch: master 写作1hexo new &quot;标题&quot; 然后在source\_posts目录里面找到标题.md编辑好内容后 执行12hexo cleanhexo generate 生成静态页面1hexo server --debug 进行本地调试 上传觉得差不多就直接上传吧1hexo deploy]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
 </search>
